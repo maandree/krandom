@@ -1,2 +1,5 @@
 Keccak-based userspace pseudorandom number generator.
 
+With the default parameters, krandom is about twice
+as fast as Linux's /dev/urandom. And it's tunable!
+
