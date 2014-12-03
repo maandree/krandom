@@ -50,10 +50,10 @@ FLAGS = $(WARN) -std=gnu99
 
 
 .PHONY: default
-default: command
+default: command shell
 
 .PHONY: all
-all: command
+all: command shell
 
 
 .PHONY: command
@@ -66,6 +66,31 @@ bin/%: obj/%.o
 obj/%.o: src/%.c
 	@mkdir -p obj
 	$(CC) $(FLAGS) $(COPTIMISE) -c -o $@ $< $(CFLAGS) $(CPPFLAGS)
+
+
+.PHONY: shell
+shell: bash zsh fish
+
+.PHONY: bash
+bash: bin/$(COMMAND).bash
+
+.PHONY: zsh
+zsh: bin/$(COMMAND).zsh
+
+.PHONY: fish
+fish: bin/$(COMMAND).fish
+
+bin/%.bash: src/completion
+	@mkdir -p bin
+	auto-auto-complete bash --output $@ --source $< command="$*"
+
+bin/%.zsh: src/completion
+	@mkdir -p bin
+	auto-auto-complete zsh --output $@ --source $< command="$*"
+
+bin/%.fish: src/completion
+	@mkdir -p bin
+	auto-auto-complete fish --output $@ --source $< command="$*"
 
 
 
