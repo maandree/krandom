@@ -209,7 +209,6 @@ uninstall:
 	-rm -- "$(DESTDIR)$(DATADIR)/bash-completion/completions/$(COMMAND)"
 	-rm -- "$(DESTDIR)$(DATADIR)/fish/completions/$(COMMAND).fish"
 	-rm -- "$(DESTDIR)$(DATADIR)/zsh/site-functions/_$(COMMAND)"
-	-rm -- "$(DESTDIR)$(MANDIR)/man1/$(COMMAND).1"
 	-rm -- "$(DESTDIR)$(INFODIR)/$(PKGNAME).info"
 	-rm -- "$(DESTDIR)$(DOCDIR)/$(PKGNAME).pdf"
 	-rm -- "$(DESTDIR)$(DOCDIR)/$(PKGNAME).dvi"
