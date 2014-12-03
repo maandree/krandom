@@ -126,6 +126,97 @@ bin/%.ps: info/%.texinfo info/fdl.texinfo
 
 
 
+.PHONY: install
+install: install-base install-shell install-info
+
+.PHONY: install-all
+install-all: install-base install-shell install-doc
+
+.PHONY: install-base
+install-base: install-command install-copyright
+
+
+.PHONY: install-command
+install-command: bin/krandom
+	install -dm755 -- "$(DESTDIR)$(BINDIR)"
+	install -m755 -- $< "$(DESTDIR)$(BINDIR)/$(COMMAND)"
+
+
+.PHONY: install-copyright
+install-copyright: install-copying install-license
+
+.PHONY: install-copying
+install-copying:
+	install -dm755 -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)"
+	install -m644 -- COPYING "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)/COPYING"
+
+.PHONY: install-license
+install-license:
+	install -dm755 -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)"
+	install -m644 -- LICENSE "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)/LICENSE"
+
+
+.PHONY: install-shell
+install-shell: install-bash install-fish install-zsh
+
+.PHONY: install-bash
+install-bash: bin/$(COMMAND).bash
+	install -dm755 -- "$(DESTDIR)$(DATADIR)/bash-completion/completions"
+	install -m644 -- $< "$(DESTDIR)$(DATADIR)/bash-completion/completions/$(COMMAND)"
+
+.PHONY: install-fish
+install-fish: bin/$(COMMAND).fish
+	install -dm755 -- "$(DESTDIR)$(DATADIR)/fish/completions"
+	install -m644 -- $< "$(DESTDIR)$(DATADIR)/fish/completions/$(COMMAND).fish"
+
+.PHONY: install-zsh
+install-zsh: bin/$(COMMAND).zsh
+	install -dm755 -- "$(DESTDIR)$(DATADIR)/zsh/site-functions"
+	install -m644 -- $< "$(DESTDIR)$(DATADIR)/zsh/site-functions/_$(COMMAND)"
+
+
+.PHONY: install-doc
+install-doc: install-info install-pdf install-dvi install-ps
+
+.PHONY: install-info
+install-info: bin/krandom.info
+	install -dm755 -- "$(DESTDIR)$(INFODIR)"
+	install -m644 -- $< "$(DESTDIR)$(INFODIR)/$(PKGNAME).info"
+
+.PHONY: install-pdf
+install-pdf: bin/krandom.pdf
+	install -dm755 -- "$(DESTDIR)$(DOCDIR)"
+	install -m644 -- $< "$(DESTDIR)$(DOCDIR)/$(PKGNAME).pdf"
+
+.PHONY: install-dvi
+install-dvi: bin/krandom.dvi
+	install -dm755 -- "$(DESTDIR)$(DOCDIR)"
+	install -m644 -- $< "$(DESTDIR)$(DOCDIR)/$(PKGNAME).dvi"
+
+.PHONY: install-ps
+install-ps: bin/krandom.ps
+	install -dm755 -- "$(DESTDIR)$(DOCDIR)"
+	install -m644 -- $< "$(DESTDIR)$(DOCDIR)/$(PKGNAME).ps"
+
+
+
+.PHONY: uninstall
+uninstall:
+	-rm -- "$(DESTDIR)$(BINDIR)/$(COMMAND)"
+	-rm -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)/COPYING"
+	-rm -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)/LICENSE"
+	-rmdir -- "$(DESTDIR)$(LICENSEDIR)/$(PKGNAME)"
+	-rm -- "$(DESTDIR)$(DATADIR)/bash-completion/completions/$(COMMAND)"
+	-rm -- "$(DESTDIR)$(DATADIR)/fish/completions/$(COMMAND).fish"
+	-rm -- "$(DESTDIR)$(DATADIR)/zsh/site-functions/_$(COMMAND)"
+	-rm -- "$(DESTDIR)$(MANDIR)/man1/$(COMMAND).1"
+	-rm -- "$(DESTDIR)$(INFODIR)/$(PKGNAME).info"
+	-rm -- "$(DESTDIR)$(DOCDIR)/$(PKGNAME).pdf"
+	-rm -- "$(DESTDIR)$(DOCDIR)/$(PKGNAME).dvi"
+	-rm -- "$(DESTDIR)$(DOCDIR)/$(PKGNAME).ps"
+
+
+
 .PHONY: clean
 clean:
 	-rm -r bin obj
