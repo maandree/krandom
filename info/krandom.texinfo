@@ -61,14 +61,69 @@ Texts. A copy of the license is included in the section entitled
 @node Overview
 @chapter Overview
 
-TODO
+@command{krandom} is a tunable userspace pseudorandom number generator
+based on the Keccak hash-algorithm.
+
+With @command{krandom} default parameters it is about twice as fast
+as Linux's @file{/dev/urandom}, but it's performance can be tuned
+both up and down.
+
+@command{krandom} creates a Keccak sponge and initialises its state
+@footnote{(25 @command{int_fast64_t}:s)} with random data from
+@file{/dev/urandom}. This simulate it absorption phase of Keccak
+from a random message. It then performance the squeezing phase
+continuously until the standard output pipe breaks, that is,
+when the program it pipes into exits or closes standard input.
+
+On a more technical level, @command{krandom} will pause automatically
+if the other program does not read its input, and resume when it does.
+This is because the pipe will become full and block writting for
+@command{krandom}.
 
 
 
 @node Invoking
 @chapter Invoking
 
-TODO
+@command{krandom} recognises the following options:
+
+@table @option
+@item -h
+@itemx --help
+Display a summary of options.
+
+@item -v
+@itemx --verbose
+Print extra information.
+
+@item -R
+@itemx --bitrate
+@itemx --rate RATE
+Change the rate.
+
+@item -C
+@itemx --capacity CAPACITY
+Change the capacity.
+
+@item -N
+@itemx -O
+@itemx --output-size
+@itemx --output SIZE
+Change the output size.
+This is the size of a squeezed block,
+the total output is unlimited.
+
+@item -S
+@itemx -B
+@itemx --state-size
+@itemx --state SIZE
+Change the state size.
+
+@item -W
+@itemx --word-size
+@itemx --word SIZE
+Change the word size.
+@end table
 
 
 
