@@ -50,10 +50,10 @@ FLAGS = $(WARN) -std=gnu99
 
 
 .PHONY: default
-default: command shell doc
+default: command shell info
 
 .PHONY: all
-all: command shell info
+all: command shell doc
 
 
 .PHONY: command
