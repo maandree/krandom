@@ -128,11 +128,13 @@ int main(int argc, char** argv)
   ssize_t got;
   int r, fd = -1, verbose = 0;
   
-  execname = *argv;
+  execname = argc ? *argv : "krandom";
   
   
   memset(&state, 0, sizeof(libkeccak_state_t));
   libkeccak_generalised_spec_initialise(&gspec);
+  if (!argc)
+    goto skip_argv_parsing;
   
   args_init("Keccak-based userspace pseudorandom number generator",
 	    "krandom [options...]", NULL,
@@ -156,6 +158,7 @@ int main(int argc, char** argv)
   if (args_opts_used("-W"))  gspec.word_size  = atol(LAST("-W"));
   if (args_opts_used("-v"))  verbose          = 1;
   
+ skip_argv_parsing:
   if ((r = make_spec(&gspec, &spec)))
       goto done;
   
@@ -202,7 +205,8 @@ int main(int argc, char** argv)
  done:
   if (fd >= 0)
     close(fd);
-  args_dispose();
+  if (argc)
+    args_dispose();
   free(generated_random);
   libkeccak_state_fast_destroy(&state);
   return r;
