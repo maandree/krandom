@@ -18,6 +18,8 @@ DESCRIPTION
 	as fast as Linux's /dev/urandom. And it's tunable!
 
 OPTIONS
+	The following options are supported:
+
 	-C capacity
 		Select Keccak capacity.
 
@@ -36,7 +38,7 @@ OPTIONS
 		Select Keccak word size.
 
 	-v
-		Print extra informatio.
+		Print extra information.
 
 NOTES
 	krandom is a terrible entropy-generator. Good ways

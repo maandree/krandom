@@ -13,10 +13,13 @@ krandom.o: krandom.c arg.h
 
 install: krandom
 	mkdir -p -- "$(DESTDIR)$(PREFIX)/bin"
+	mkdir -p -- "$(DESTDIR)$(MANPREFIX)/man1"
 	cp -- krandom "$(DESTDIR)$(PREFIX)/bin/"
+	cp -- krandom.1 "$(DESTDIR)$(MANPREFIX)/man1/"
 
 uninstall:
 	-rm -f -- "$(DESTDIR)$(PREFIX)/bin/krandom"
+	-rm -f -- "$(DESTDIR)$(MANPREFIX)/man1/krandom.1"
 
 clean:
 	-rm -r -- krandom *.o
