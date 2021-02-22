@@ -1,15 +1,5 @@
-_/
-bin/
-obj/
-\#*\#
-.*
-!.git*
 *~
-*.bak
-*.swo
-*.swp
+*\#*
 *.o
-*.out
 *.su
-*.gch
-
+/krandom
