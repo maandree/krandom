@@ -1,18 +1,45 @@
-Keccak-based userspace pseudorandom number generator.
+NAME
+	krandom - Keccak-based userspace pseudorandom number generator
 
-With the default parameters, krandom is about twice
-as fast as Linux's /dev/urandom. And it's tunable!
+SYNOPSIS
+	krandom [-C capacity] [-N output-size] [-R rate] [-S state-size] [-W word-size] [-v]
 
+DESCRIPTION
+	krandom create a Keccak sponge with a random state
+	and continually squeezes it to generate pseudorandom
+	binary data.
 
-Can krandom be used as an entropy-generator?
+	Like yes(1), krandom will automatically pause soon
+	after the other end of the standard output pipe stops
+	reading and will terminate with no process reading
+	at the other end of the standard output pipe anymore.
 
-  Basically, no. The only less effective way
-  to generate entropy is to print /dev/urandom.
-  Good ways to generate entropy include:
-    Typing randomly in the terminal
-    Moving the rat pointer around erratically
-    Run ping
-    Listen to music
-    Watch videos
-    Run ponysay (surprisingly effective)
+	With the default parameters, krandom is about twice
+	as fast as Linux's /dev/urandom. And it's tunable!
 
+OPTIONS
+	-C capacity
+		Select Keccak capacity.
+
+	-R rate
+		Select Keccak rate.
+
+	-N output-size
+		Select Keccak output size. This is the size
+		of a squeezed block, the total output is
+		unlimited.
+
+	-S state-size
+		Select Keccak state size.
+
+	-W state-size
+		Select Keccak word size.
+
+	-v
+		Print extra informatio.
+
+NOTES
+	krandom is a terrible entropy-generator. Good ways
+	to generate entropy include: typing randomly in the
+	terminal, moving the rat pointer around erratically,
+	running ping, listening to music, and watching videos.
