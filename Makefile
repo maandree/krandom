@@ -3,6 +3,7 @@
 CONFIGFILE = config.mk
 include $(CONFIGFILE)
 
+
 all: krandom
 
 krandom: krandom.o
@@ -22,6 +23,6 @@ uninstall:
 	-rm -f -- "$(DESTDIR)$(MANPREFIX)/man1/krandom.1"
 
 clean:
-	-rm -r -- krandom *.o
+	-rm -f -- krandom *.o *.su
 
 .PHONY: all install uninstall clean
