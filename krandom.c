@@ -147,8 +147,8 @@ main(int argc, char *argv[])
 	fd = open(URANDOM, O_RDONLY);
 	if (fd < 0)
 		goto fail;
-	for (ptr = 0, length = sizeof(state.S); ptr < length;) {
-		got = read(fd, (char*)(state.S) + ptr, length - ptr);
+	for (ptr = 0, length = sizeof(state.S.w8); ptr < length;) {
+		got = read(fd, &state.S.w8[ptr], length - ptr);
 		if (got <= 0) {
 			if (!got) {
 				fprintf(stderr, "%s: %s contained less than %zu bytes\n", argv0, URANDOM, length);
