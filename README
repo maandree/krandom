@@ -5,7 +5,7 @@ SYNOPSIS
 	krandom [-C capacity] [-N output-size] [-R rate] [-S state-size] [-W word-size] [-v]
 
 DESCRIPTION
-	krandom create a Keccak sponge with a random state
+	krandom creates a Keccak sponge with a random state
 	and continually squeezes it to generate pseudorandom
 	binary data.
 
@@ -34,7 +34,7 @@ OPTIONS
 	-S state-size
 		Select Keccak state size.
 
-	-W state-size
+	-W word-size
 		Select Keccak word size.
 
 	-v

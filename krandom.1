@@ -19,7 +19,7 @@ krandom - Keccak-based userspace pseudorandom number generator
 
 .SH DESCRIPTION
 .B krandom
-create a Keccak sponge with a random state and continually
+creates a Keccak sponge with a random state and continually
 squeezes it to generate pseudorandom binary data.
 .PP
 Like
@@ -49,7 +49,7 @@ block, the total output is unlimited.
 .BI -S\  state-size
 Select Keccak state size.
 .TP
-.BI -W\  state-size
+.BI -W\  word-size
 Select Keccak word size.
 .TP
 .B -v
@@ -67,7 +67,7 @@ utility does not use the standard input.
 None.
 
 .SH ENVIRONMENT VARIABLES
-No environment variables affects the execution of
+No environment variable affects the execution of
 .BR krandom
 
 .SH ASYNCHRONOUS EVENTS
@@ -76,7 +76,7 @@ Default.
 .SH STDOUT
 The
 .B krandom
-utility prints psuedorandom binary data to the standard output.
+utility prints pseudorandom binary data to the standard output.
 
 .SH STDERR
 The standard error is used for diagnostic messages.
